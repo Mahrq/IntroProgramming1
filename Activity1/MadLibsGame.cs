@@ -98,10 +98,12 @@ namespace Activity1
         public void GameSetUp()
         {
             Console.Clear();
+            //Clear list of stored inputs for new round
             if (storedUserInput.Count > 0)
             {
                 storedUserInput.Clear();
             }
+            //Get user to pick from the 3 stories
             selectedStory = SelectStory();
             Console.Clear();
         }
@@ -198,6 +200,42 @@ namespace Activity1
                     temp.Add(userAnswer);
                     return temp;
                 case StoryMode.PG:
+                    Console.WriteLine("Please enter a thing (Plural)");
+                    userAnswer = InputValidation.ValidateInput();
+                    temp.Add(userAnswer);
+                    Console.WriteLine("Please enter another thing (Plural)");
+                    userAnswer = InputValidation.ValidateInput();
+                    temp.Add(userAnswer);
+                    Console.WriteLine("Please enter an occupation");
+                    userAnswer = InputValidation.ValidateInput();
+                    temp.Add(userAnswer);
+                    Console.WriteLine("Please enter a body part");
+                    userAnswer = InputValidation.ValidateInput();
+                    temp.Add(userAnswer);
+                    Console.WriteLine("Please enter an adjective");
+                    userAnswer = InputValidation.ValidateInput();
+                    temp.Add(userAnswer);
+                    Console.WriteLine("Please enter another adjective");
+                    userAnswer = InputValidation.ValidateInput();
+                    temp.Add(userAnswer);
+                    Console.WriteLine("Please enter a Company name");
+                    userAnswer = InputValidation.ValidateInput();
+                    temp.Add(userAnswer);
+                    Console.WriteLine("Please enter a verb");
+                    userAnswer = InputValidation.ValidateInput();
+                    temp.Add(userAnswer);
+                    Console.WriteLine("Please enter a place");
+                    userAnswer = InputValidation.ValidateInput();
+                    temp.Add(userAnswer);
+                    Console.WriteLine("Please enter an adjective");
+                    userAnswer = InputValidation.ValidateInput();
+                    temp.Add(userAnswer);
+                    Console.WriteLine("Please enter a place");
+                    userAnswer = InputValidation.ValidateInput();
+                    temp.Add(userAnswer);
+                    Console.WriteLine("Please enter a verb (Past tense)");
+                    userAnswer = InputValidation.ValidateInput();
+                    temp.Add(userAnswer);
                     return temp;
                 case StoryMode.R18:
                     return temp;
@@ -225,9 +263,16 @@ namespace Activity1
                     $"\nIf that wasn't good enough already, {storedInputs[3]} was there singing {storedInputs[2]}. " +
                     $"\nI was so inspired by the music, I had to get up out of my seat and {storedInputs[5]}.";
                 case StoryMode.PG:
-                    return temp = "Coming Soon!";
+                    return temp = 
+                    $"\nYou know you've made it when {storedInputs[6]} wants to shut you down." +
+                    $"\nSo here are five {storedInputs[4]} tips I took from my days as a {storedInputs[2]} to get to where I am." +
+                    $"\nOne. If the other {storedInputs[0]} jumped off the {storedInputs[10]}, do it better." +
+                    $"\nTwo. Always wear {storedInputs[5]} underwear in case you're in {storedInputs[8]}." +
+                    $"\nThree. When you get to my age, make sure you have {storedInputs[11]} at least once." +
+                    $"\nFour. Remember, turning on the {storedInputs[1]} is illegal, unless you're {storedInputs[9]}" +
+                    $"\nAnd five. Don't let other people {storedInputs[7]} your {storedInputs[3]}, do it yourself.";
                 case StoryMode.R18:
-                    return temp = "Coming Soon!";
+                    return temp = "Cumming Soon!";
                 default:
                     return temp = "Coming Soon!";
             }
@@ -240,7 +285,7 @@ namespace Activity1
         {
             Console.WriteLine("Choose your story:" +
                 "\n\n1 = Pizza Party (G)" +
-                "\n2 = Coming Soon! (PG)" +
+                "\n2 = Tips For Success (PG)" +
                 "\n3 = Cumming Soon! (R18");
             int userInput = InputValidation.ValidateNumeric(1, 3);
             switch (userInput)
