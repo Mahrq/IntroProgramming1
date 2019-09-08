@@ -331,7 +331,7 @@ namespace Activity5
                     wordBank[6] = "AMATERASU";
                     wordBank[0] = "VISHNU";
                     wordBank[7] = "SHIVA";
-                    wordBank[8] = "WOOX";
+                    wordBank[8] = "ANUBIS";
                     Word = wordBank[random.Next(0, (wordBank.Length))];
                     WordCover = GenerateCover(Word.Length);
                     Topic = chosenTopic;
