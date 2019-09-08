@@ -73,7 +73,9 @@ namespace Activity3
                 "\nAttempts: {2}"
                 , smileCount, grumpyCount, attemptsRemaining);
             //Ask user to for input
+            Console.WriteLine("\nChoose a number from the table");
             userInput = GetUserInput(storedInputs);
+            storedInputs.Add(userInput);
             //Turn off the cover at the index which will reveal a face
             gridCover[userInput - 1] = false;
             //Calculate points depending on which face was revealed
