@@ -51,7 +51,7 @@ namespace Final
                     "\n5 = HangMan" +
                     "\n6 = Exit ");
                 //User's input will be used to return an enum aswell as use that enum to index the gameModels array
-                gameSelect = (GameSelect)(InputValidation.ValidateNumeric(1, 6) - 1);
+                gameSelect = (GameSelect)(InputValidation.ValidateInput(1, 6) - 1);
                 //GameSelect.Exit will always cause out of range exception since its enum value is out of the range of the array
                 if (gameSelect == GameSelect.Exit)
                 {

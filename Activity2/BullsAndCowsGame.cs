@@ -66,24 +66,21 @@ namespace Activity2
                 case Difficulty.Normal:
                     guessesLeft = 8;
                     sizeToGuess = 4;
-                    cpuNumber = GenerateCpuNumbers(sizeToGuess);
                     break;
                 case Difficulty.Hard:
                     guessesLeft = 10;
                     sizeToGuess = 6;
-                    cpuNumber = GenerateCpuNumbers(sizeToGuess);
                     break;
                 case Difficulty.Expert:
                     guessesLeft = 12;
                     sizeToGuess = 8;
-                    cpuNumber = GenerateCpuNumbers(sizeToGuess);
                     break;
                 default:
                     guessesLeft = 8;
                     sizeToGuess = 4;
-                    cpuNumber = GenerateCpuNumbers(sizeToGuess);
                     break;
             }
+            cpuNumber = GenerateCpuNumbers(sizeToGuess);
             Console.Clear();
         }
         /// <summary>
@@ -173,7 +170,7 @@ namespace Activity2
                 "\n\n1 = Normal" +
                 "\n2 = Hard" +
                 "\n3 = Expert");
-            int userInput = InputValidation.ValidateNumeric(1, 3);
+            int userInput = InputValidation.ValidateInput(1, 3);
             switch (userInput)
             {
                 case 1:
@@ -242,7 +239,7 @@ namespace Activity2
         }
         /// <summary>
         /// Generates a specified amount of numbers and stores each digit into an array index.
-        /// Each digit is between 1-9
+        /// Each digit is between 1-9 and is unique.
         /// </summary>
         /// <param name="inputArraySize">Will return array of the size</param>
         /// <returns></returns>

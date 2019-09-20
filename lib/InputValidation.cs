@@ -47,8 +47,9 @@ namespace ProjectUtility
             }
         }
         /// <summary>
-        /// ValidateNumeric(): 
-        ///     Method returns an integer value defined by user input while also validating their input
+        /// ValidateInput(): 
+        ///     Method returns an integer value defined by user input while also validating their input.
+        ///     Overloaded version from the string variation of this method.
         /// 
         /// Arguments:
         ///     -The minimum integer input allowed from the user
@@ -65,7 +66,7 @@ namespace ProjectUtility
         /// <param name="rangeMin">Specify the min input allowed. Default 0</param>
         /// <param name="rangeMax">Specify the max input allowed. Default 9</param>
         /// <returns></returns>
-        public static int ValidateNumeric(int rangeMin = 0, int rangeMax = 9)
+        public static int ValidateInput(int rangeMin = 0, int rangeMax = 9)
         {
             int userInput;
             for (; ; )

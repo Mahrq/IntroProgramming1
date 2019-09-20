@@ -60,7 +60,7 @@ namespace Activity5
                 "\n1 = Planets" +
                 "\n2 = Gods");
             //Cast numeric input into enum
-            selectedTopic = (MysteryTopic)InputValidation.ValidateNumeric((int)MysteryTopic.Planet, (int)MysteryTopic.God);
+            selectedTopic = (MysteryTopic)InputValidation.ValidateInput((int)MysteryTopic.Planet, (int)MysteryTopic.God);
             //Generate the properties of the hidden word depending on the enum passed.
             hiddenWord.ChooseNewWord(selectedTopic);
             //Reset counter

@@ -287,7 +287,7 @@ namespace Activity1
                 "\n\n1 = Pizza Party (G)" +
                 "\n2 = Tips For Success (PG)" +
                 "\n3 = Cumming Soon! (R18");
-            int userInput = InputValidation.ValidateNumeric(1, 3);
+            int userInput = InputValidation.ValidateInput(1, 3);
             switch (userInput)
             {
                 case 1:

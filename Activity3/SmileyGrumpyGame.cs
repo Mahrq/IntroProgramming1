@@ -9,7 +9,9 @@ using ProjectUtility;
 /// Description:    Class stores the logic of the game's flow.
 /// Author:         Mark Mendoza
 /// Date:           24/08/2019
-/// Version:        1.0
+/// Last Updated:   20/09/2019
+/// Version:        2.0
+/// Notes:          Changed input type to accepting row and column input instead of 1-9.
 /// </summary>
 namespace Activity3
 {
@@ -29,6 +31,7 @@ namespace Activity3
         //Required instances
         private Random random = new Random();
         private GameGraphics gameGraphics = new GameGraphics();
+        private RowColumnConverter rowColumnConverter = new RowColumnConverter();
         /// <summary>
         /// Introduce user to game and display instructions
         /// </summary>
@@ -49,6 +52,7 @@ namespace Activity3
             gridCover = GenerateCover(9);
             //Generate 3 smileys and 6 grumpys
             facesCover = GenerateSmileys(9);
+            //Reset remaining attempts
             attemptsRemaining = 6;
             //Reset smile and grumpy count
             smileCount = 0;
@@ -73,13 +77,13 @@ namespace Activity3
                 "\nAttempts: {2}"
                 , smileCount, grumpyCount, attemptsRemaining);
             //Ask user to for input
-            Console.WriteLine("\nChoose a number from the table");
-            userInput = GetUserInput(storedInputs);
+            //Get data from the table
+            userInput = GetUserInput(storedInputs, rowColumnConverter.RowColToIntTable);
             storedInputs.Add(userInput);
             //Turn off the cover at the index which will reveal a face
-            gridCover[userInput - 1] = false;
+            gridCover[userInput] = false;
             //Calculate points depending on which face was revealed
-            switch (facesCover[userInput - 1])
+            switch (facesCover[userInput])
             {
                 case Face.Smile:
                     smileCount++;
@@ -198,29 +202,80 @@ namespace Activity3
             return temp;
         }
         /// <summary>
-        /// Gets valid input from user to use in game.
+        /// Gets valid input from user to use to uncover a slot in the grid.
+        /// 
+        /// Arguments:
+        ///     -A list of previous valid inputs to compare if the same option is chosen again.
+        ///     -A table that translates the input to a value
+        /// 
+        /// Steps:
+        ///     -Try get user to input a row.
+        ///     -Try get user to input a column.
+        ///     -Convert both inputs into a key.
+        ///     -Use key to get an output from the table.
+        ///     -If the output has already been chosen before then repeat from the first step.
         /// </summary>
-        /// <param name="previousInputs">A list of stored valid inputs a user has made to prevent duplicate inputs</param>
         /// <returns></returns>
-        private int GetUserInput(List<int> previousInputs)
+        private int GetUserInput(List<int> previousInputs, Dictionary<string, int> table)
         {
-            int input;
-            for (; ; )
+            int temp;
+            char[] input = new char[2];
+            for(; ; )
             {
-                //Get input
-                input = InputValidation.ValidateNumeric(1, 9);
-                //Check if any previous inputs
-                if (InputValidation.CheckAlreadyUsedInput(previousInputs, input))
+                Console.WriteLine("\nPick A row");
+                input[(int)GridSelection.Row] = InputValidation.ValidateInput(1, 3).ToString()[0];
+                Console.WriteLine("\nPick A column");
+                input[(int)GridSelection.Column] = InputValidation.ValidateInput(1, 3).ToString()[0];
+                if (table.TryGetValue(new string(input), out temp) && !InputValidation.CheckAlreadyUsedInput(previousInputs, temp))
                 {
-                    Console.WriteLine("You've alredy chosen this number!\nPlease enter a number between 1-9");
+                    return temp;
                 }
-                //Successful input
                 else
                 {
-                    return input;
+                    Console.WriteLine("You've already chosen this slot");
                 }
+
             }
         }
+
+        private enum GridSelection
+        {
+            Row,
+            Column
+        }
+    }
+    /// <summary>
+    /// Class contains a dictionary with key value pairs representing a row/column input and array indexers.
+    /// </summary>
+    class RowColumnConverter
+    {
+        public Dictionary<string, int> RowColToIntTable { get; private set; }
+
+        public RowColumnConverter()
+        {
+            RowColToIntTable = FillTable();
+        }
+        /// <summary>
+        /// Creates a dictionary that has keys that represent the row and column with a value that
+        /// represents an index of an array.
+        /// </summary>
+        /// <returns></returns>
+        private Dictionary<string, int> FillTable()
+        {
+            Dictionary<string, int> temp = new Dictionary<string, int>();
+            temp.Add("11", 0);
+            temp.Add("12", 1);
+            temp.Add("13", 2);
+            temp.Add("21", 3);
+            temp.Add("22", 4);
+            temp.Add("23", 5);
+            temp.Add("31", 6);
+            temp.Add("32", 7);
+            temp.Add("33", 8);
+
+            return temp;
+        }
+
     }
     //Used to index emoticons
     public enum Face

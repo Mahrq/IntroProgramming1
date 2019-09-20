@@ -73,10 +73,10 @@ namespace Activity4
                 Console.WriteLine("Place your bet!" +
                     "\n1 = Human" +
                     "\n2 = Cpu");
-                playerBetOn = (WinScenario)InputValidation.ValidateNumeric(1, 2);
+                playerBetOn = (WinScenario)InputValidation.ValidateInput(1, 2);
                 Console.WriteLine("How much do you want to bet?" +
                     "\nYour Balance: {0:C}", playerMoneyPool);
-                playerBetAmount = InputValidation.ValidateNumeric(1, playerMoneyPool);
+                playerBetAmount = InputValidation.ValidateInput(1, playerMoneyPool);
                 //Subtract bet from moeny pool
                 playerMoneyPool -= playerBetAmount;
                 //Draw the game.
