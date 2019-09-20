@@ -342,10 +342,10 @@ namespace Activity1
                     //Get the filepath of where the user saved their item
                     string savePath = string.Format(@"{0}", saveFileDialog.FileName);
                     //Write to the item
-                    using (StreamWriter sw = new StreamWriter(savePath))
+                    using (StreamWriter streamWriter = new StreamWriter(savePath))
                     {
-                        sw.WriteLine(contents);
-                        sw.Close();
+                        streamWriter.WriteLine(contents);
+                        streamWriter.Close();
                     }
                 }
             }
