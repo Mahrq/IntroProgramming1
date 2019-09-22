@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ProjectUtility;
+﻿using ProjectUtility;
 /// <summary>
 /// File:           Program.cs
 /// Description:    Game of Random Racer where 2 entities race to the end of a line.

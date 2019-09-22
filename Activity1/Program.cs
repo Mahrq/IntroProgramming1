@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ProjectUtility;
 /// <summary>
 /// File:           Program.cs
-/// Description:    Simulates a game of "Mad Libs" with 3 stories to choose from.
+/// Description:    Simulates a game of "Mad Libs" with 2 stories to choose from.
 ///                 Game can be narrated by system voice if any are installed.
 ///                 User can save their generated story into a text file.
 /// Author:         Mark Mendoza

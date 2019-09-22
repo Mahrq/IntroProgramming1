@@ -1,10 +1,5 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System;
 using System.Threading;
-using System.Threading.Tasks;
 using ProjectUtility;
 /// <summary>
 /// File:           RandomRacerGame.cs
@@ -20,7 +15,7 @@ namespace Activity4
 {
     public class RandomRacerGame : IGameModel
     {
-        public int gamesPlayed = 0;
+        private int gamesPlayed = 0;
         private RandomRacerPlayer[] racers = new RandomRacerPlayer[2];
         private int[] racerPositions = new int[2];
         private WinScenario winnerOutcome;
@@ -44,7 +39,12 @@ namespace Activity4
             }
         }
         /// <summary>
-        /// Introduce user to the game with instructions on how to play
+        /// Intro():
+        ///     Introduce user to the game and provide instructions
+        ///     
+        ///Steps:
+        ///     -Print to the console, welcome message and instructions
+        ///     -Read user input
         /// </summary>
         public void Intro()
         {
@@ -55,7 +55,18 @@ namespace Activity4
             Console.ReadLine();
         }
         /// <summary>
-        /// Set up the necessary components before starting a new round.
+        /// GameSetUp():
+        ///     Set up the necessary components before starting a new round.
+        ///     
+        /// Steps:
+        ///     -If player has money then Set up.
+        ///     -Reset both player's positions.
+        ///     -Ask user to make a bet on a player.
+        ///     -Ask user to input an amount to bet.
+        ///     -Subtract bet amount from money pool.
+        ///     -Draw the game.
+        ///     -Ask user to start game.
+        ///     -Else proceed to exit the game.
         /// </summary>
         public void GameSetUp()
         {
@@ -95,9 +106,27 @@ namespace Activity4
 
         }
         /// <summary>
-        /// Algorithim for one game cycle according to the rules of the game.
+        /// GameCycle():
+        ///     Algorithim for one game cycle. The game plays automatically until a winner is declared.
+        ///     
+        /// Arguments:
+        ///     -A reference to a bool depicting a game loop.
+        ///     
+        /// Steps:
+        ///     1# Draw Cycle
+        ///     -Every 1 second update game.
+        ///     -Randomly generate the next step for each player.
+        ///     -Redraw the game with the updated positions.
+        ///     -Check if any player reached the finish line.
+        ///     
+        ///     2# Pay out
+        ///     -If the player that reaches the finish line matches the user's bet
+        ///     then pay out 2x the amount bet.
+        ///     -If both players reach the finish line then the match is a draw,
+        ///     Pay back the amount the user bet.
+        ///     -Else player loses bet.
+        ///     -Terminate loop.
         /// </summary>
-        /// <param name="gameLoop">Loop conditional for continuing the game.</param>
         public void GameCycle(ref bool gameLoop)
         {
             if (hasMoney)
@@ -151,7 +180,12 @@ namespace Activity4
             gameLoop = false;
         }
         /// <summary>
-        /// Display the scoreboard  to the user.
+        /// GameConclusion():
+        ///     Display the results of the entire game session
+        ///     
+        /// Steps:
+        ///     -Display the total games won and lost.
+        ///     -Wait input from user.
         /// </summary>
         public void GameConclusion()
         {
@@ -172,7 +206,13 @@ namespace Activity4
             }
         }
         /// <summary>
-        /// Thank user for playing before exiting the application.
+        /// Outro():
+        ///     Thank user for playing before exiting the application.
+        ///     
+        /// Steps:
+        ///     -Display exiting message.
+        ///     -Wait input from user.
+        ///     -If exiting with 0 money, then launch website.
         /// </summary>
         public void Outro()
         {

@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Speech;
-using System.Speech.AudioFormat;
 using System.Speech.Synthesis;
 using System.IO;
 using System.Windows.Forms;
@@ -23,7 +18,6 @@ namespace Activity1
 {
     public class MadLibsGame : IGameModel
     {
-        private string[] storyTemplates = new string[3];
         private List<string> storedUserInput = new List<string>();
         private string finishedStory;
         private StoryMode selectedStory = StoryMode.General;
@@ -31,9 +25,15 @@ namespace Activity1
         private MadLibsStorySaver storySaver = new MadLibsStorySaver();
         private bool useVoice;
         /// <summary>
-        /// Introduce user to the game and provide instructions
-        /// Default option to use voice narration from system but will check
-        /// if user has installed voices first. 
+        /// Intro():
+        ///     Introduce user to the game and provide instructions.
+        ///     Default option to use voice narration from system but will check
+        ///     if user has installed voices first.
+        /// 
+        /// Steps:
+        ///     -Display game title and game instructions
+        ///     -Check if the there are any system voices installed on the PC.
+        ///     -Try use Microsoft Zira Desktop as system voice otherwise use the first installed voice in the PC.   
         /// </summary>
         public void Intro()
         {
@@ -71,7 +71,7 @@ namespace Activity1
                     }
                 }
             }
-            //Dispose synth to release resources.
+            //Dispose synth to release resources if there are no installed voices.
             else
             {
                 synth.Dispose();
@@ -91,9 +91,12 @@ namespace Activity1
             }
         }
         /// <summary>
-        /// Set up the game for new round.
-        /// Clear list for new inputs
-        /// Ask user to pick a story mode.
+        /// GameSetUp():
+        ///     Set up the game for new round.
+        /// 
+        /// Steps:
+        ///     -Clear list for new inputs
+        ///     -Ask user to pick a story mode.
         /// </summary>
         public void GameSetUp()
         {
@@ -103,14 +106,21 @@ namespace Activity1
             {
                 storedUserInput.Clear();
             }
-            //Get user to pick from the 3 stories
+            //Get user to pick from the 2 stories
             selectedStory = SelectStory();
             Console.Clear();
         }
         /// <summary>
-        /// Algorithim for one game cycle according to the rules of the game.
+        /// GameCycle():
+        ///     Algorithim for one game cycle. The user will be asked a series of questions.
+        /// 
+        /// Arguments:
+        ///     -A reference to a bool depicting a game loop.
+        /// 
+        /// Steps:
+        ///     -Ask User a series of questions where each answer is stored in a list
+        ///     -Ask user to continue after finalising the list.
         /// </summary>
-        /// <param name="gameLoop">Loop conditional for continuing the game.</param>
         public void GameCycle(ref bool gameLoop)
         {
             storedUserInput = AskQuestionair(selectedStory);
@@ -119,7 +129,15 @@ namespace Activity1
             gameLoop = false;
         }
         /// <summary>
-        /// Display the completed story with the user's answers.
+        /// GameConclusion():
+        ///     Display the completed story with the user's answers while the system voice narrates the
+        ///     story if enabled.
+        ///     Also allows user the option of saving their story into their PC.
+        /// 
+        /// Steps:
+        ///     -Display the Finished Story.
+        ///     -Optional system voice will narrate the story.
+        ///     -Ask user if they Want to save their story into a text file on their PC.
         /// </summary>
         public void GameConclusion()
         {
@@ -148,7 +166,12 @@ namespace Activity1
             }
         }
         /// <summary>
-        /// Thank user for playing before exiting the application.
+        /// Outro():
+        ///     Thank user for playing before exiting the application.
+        ///     
+        /// Steps:
+        ///     -Display exiting message.
+        ///     -Wait input from user.
         /// </summary>
         public void Outro()
         {
@@ -157,10 +180,20 @@ namespace Activity1
             Console.ReadLine();
         }
         /// <summary>
-        /// Asks the user a series of questions and then stores those answers into a list.
+        /// AskQuestionair():
+        ///     Asks the user a series of questions and store each answer into a list.
+        /// 
+        /// Arguments:
+        ///     -Depending on the mode selected will determine which intructions are required of the user.
+        /// 
+        /// Steps:
+        ///     -Create List
+        ///     -Display Instructions
+        ///     -Get user input.
+        ///     -Add input into list.
+        ///     -Repeat until all required inputs are supplied.
+        ///     -Return the List.
         /// </summary>
-        /// <param name="storyMode">Alters the questions asked depending on the mode.</param>
-        /// <returns></returns>
         private List<string> AskQuestionair(StoryMode storyMode)
         {
             List<string> temp = new List<string>();
@@ -237,18 +270,22 @@ namespace Activity1
                     userAnswer = InputValidation.ValidateInput();
                     temp.Add(userAnswer);
                     return temp;
-                case StoryMode.R18:
-                    return temp;
                 default:
                     return temp;
             }
         }
         /// <summary>
-        /// Create the story filling in the blanks using the user's stored answers
+        /// GenerateStory():
+        ///     Create the story filling in the blanks using the user's stored answers.
+        ///     
+        /// Arguments:
+        ///     -Depending on the mode chosen will determine which story template is used.
+        ///     -A list containing the users inputs to be used to fill the blanks.
+        /// 
+        /// Steps:
+        ///     -Use List to replace the blanks in the template
+        ///     -Return the full string.
         /// </summary>
-        /// <param name="storyMode">Selected story mode</param>
-        /// <param name="storedInputs">list of valid answers the user has input.</param>
-        /// <returns></returns>
         private string GenerateStory(StoryMode storyMode, List<string> storedInputs)
         {
             string temp;
@@ -271,43 +308,42 @@ namespace Activity1
                     $"\nThree. When you get to my age, make sure you have {storedInputs[11]} at least once." +
                     $"\nFour. Remember, turning on the {storedInputs[1]} is illegal, unless you're {storedInputs[9]}" +
                     $"\nAnd five. Don't let other people {storedInputs[7]} your {storedInputs[3]}, do it yourself.";
-                case StoryMode.R18:
-                    return temp = "Cumming Soon!";
                 default:
-                    return temp = "Coming Soon!";
+                    return temp = "Error generating story.";
             }
         }
         /// <summary>
-        /// Ask user to pick a story mode
+        /// SelectStory():
+        ///     Ask user to pick a story mode
+        /// 
+        /// Steps:
+        ///     -Display instructions to user.
+        ///     -Get user input.
+        ///     -Return the slected mode.
         /// </summary>
-        /// <returns></returns>
         private StoryMode SelectStory()
         {
             Console.WriteLine("Choose your story:" +
                 "\n\n1 = Pizza Party (G)" +
-                "\n2 = Tips For Success (PG)" +
-                "\n3 = Cumming Soon! (R18");
-            int userInput = InputValidation.ValidateInput(1, 3);
+                "\n2 = Tips For Success (PG)");
+            int userInput = InputValidation.ValidateInput(1, 2);
             switch (userInput)
             {
                 case 1:
                     return StoryMode.General;
                 case 2:
                     return StoryMode.PG;
-                case 3:
-                    return StoryMode.R18;
                 default:
                     return StoryMode.General;
             }
         }
         /// <summary>
-        /// Indexer for story template
+        /// Mode for story template
         /// </summary>
         private enum StoryMode
         {
             General,
             PG,
-            R18
         }
         /// <summary>
         /// Set up a save file system for the game.
@@ -329,9 +365,18 @@ namespace Activity1
                 saveFileDialog.OverwritePrompt = true;
             }
             /// <summary>
-            /// Opens a dialog box where the user can save their Mad Libs story
-            /// to where ever they want.
-            /// Saves it out as .txt file
+            /// SaveStory():
+            ///     Opens a dialog box where the user can save their Mad Libs story
+            ///     to where ever they want.
+            ///     Saves it out as .txt file
+            ///     
+            /// Arguments:
+            ///     -The given string will be what is written to the text file.
+            /// 
+            /// Steps:
+            ///     -Open dialogue box.
+            ///     -Get user to select a destination for the text file.
+            ///     -Write contents into the text file.
             /// </summary>
             /// <param name="contents">Writes the contents into the file</param>
             public void SaveStory(string contents)

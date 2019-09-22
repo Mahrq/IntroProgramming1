@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ProjectUtility;
 /// <summary>
 /// File:           BullsAndCowsGame.cs
@@ -33,7 +30,12 @@ namespace Activity3
         private GameGraphics gameGraphics = new GameGraphics();
         private RowColumnConverter rowColumnConverter = new RowColumnConverter();
         /// <summary>
-        /// Introduce user to game and display instructions
+        /// Intro():
+        ///     Introduce user to the game and provide instructions
+        ///     
+        ///Steps:
+        ///     -Print to the console, welcome message and instructions
+        ///     -Read user input
         /// </summary>
         public void Intro()
         {
@@ -44,7 +46,17 @@ namespace Activity3
             Console.ReadLine();
         }
         /// <summary>
-        /// Set up game for new round.
+        /// GameSetUp():
+        ///     Set up game for new round.
+        /// 
+        /// Steps:
+        ///     -Generate the cover that hides the grid.
+        ///     -Generate the smile and grumpy grid.
+        ///     -Reset remaining attempts.
+        ///     -Reset smile count.
+        ///     -Reset grumpy count.
+        ///     -Clear stored inputs.
+        ///     -Draw the grid.
         /// </summary>
         public void GameSetUp()
         {
@@ -66,9 +78,24 @@ namespace Activity3
             gameGraphics.DrawGrid(gridCover, facesCover);
         }
         /// <summary>
-        /// Algorithim for one game cycle
+        /// GameCycle():
+        ///     Algorithim for one game cycle
+        /// 
+        /// Arguments:
+        ///     -A reference to a bool depicting a game loop.
+        ///     
+        /// Steps:
+        ///     1# Input Cycle
+        ///     -Get input from user.
+        ///     -Translate input to the corresponding grid slot.
+        ///     -Store that input to prevent inputting it again.
+        ///     -Determine if the slot contained a smile or grumpy.
+        ///     -Refresh grid.
+        ///     
+        ///     2# Loop Condition.
+        ///     -If smile count is 3, then player wins, terminate loop.
+        ///     -If remaining attempts is 0, then player loses, refresh grid, terminate loop.
         /// </summary>
-        /// <param name="gameLoop"></param>
         public void GameCycle(ref bool gameLoop)
         {
             //Display score and remaining attempts
@@ -125,7 +152,12 @@ namespace Activity3
             }
         }
         /// <summary>
-        /// Displays the result of the game
+        /// GameConclusion():
+        ///     Display the results of the entire game session
+        ///     
+        /// Steps:
+        ///     -Display the total games won and lost.
+        ///     -Wait input from user.
         /// </summary>
         public void GameConclusion()
         {
@@ -136,7 +168,12 @@ namespace Activity3
             Console.ReadLine();
         }
         /// <summary>
-        /// Thanks user for playing before exiting the application.
+        /// Outro():
+        ///     Thank user for playing before exiting the application.
+        ///     
+        /// Steps:
+        ///     -Display exiting message.
+        ///     -Wait input from user.
         /// </summary>
         public void Outro()
         {
@@ -145,7 +182,19 @@ namespace Activity3
             Console.ReadLine();
         }
         /// <summary>
-        /// Generates an array of faces that contain 3 smileys and 6 grumpys
+        /// GenerateSmileys()
+        ///     Generates an array of faces that contain 3 smileys and 6 grumpys
+        /// 
+        /// Arguments:
+        ///     -Size of the array that is returned.
+        /// 
+        /// Steps:
+        ///     -Create array of specified size.
+        ///     -Iterate through the array.
+        ///     -Use random generator to pick between smile or grumpy.
+        ///     -Set chosen face to element of array.
+        ///     -If generated 3 smiles, force grumpy for the rest of the iteration.
+        ///     -If not enough smiles before the end of iteration, force smiles.
         /// </summary>
         /// <param name="arraySize">size of the array to be created</param>
         /// <returns></returns>
@@ -188,10 +237,18 @@ namespace Activity3
             return temp;
         }
         /// <summary>
-        /// Generates an array of bools that act as a switch to affect other arrays.
+        /// GenerateCover():
+        ///     Generates an array of bools that act as a switch to affect other arrays.
+        ///     
+        /// Arguments:
+        ///     -Size of the array to be generated.
+        /// 
+        /// Steps:
+        ///     -Create bool array of specific size.
+        ///     -Iterate through the array.
+        ///     -Set each element to true.
+        ///     -Return array.
         /// </summary>
-        /// <param name="arraySize">size of the array to be created</param>
-        /// <returns></returns>
         private bool[] GenerateCover(int arraySize)
         {
             bool[] temp = new bool[arraySize];
@@ -202,7 +259,8 @@ namespace Activity3
             return temp;
         }
         /// <summary>
-        /// Gets valid input from user to use to uncover a slot in the grid.
+        /// GetUserInput();
+        ///     Gets valid input from user to use to uncover a slot in the grid.
         /// 
         /// Arguments:
         ///     -A list of previous valid inputs to compare if the same option is chosen again.
@@ -215,7 +273,6 @@ namespace Activity3
         ///     -Use key to get an output from the table.
         ///     -If the output has already been chosen before then repeat from the first step.
         /// </summary>
-        /// <returns></returns>
         private int GetUserInput(List<int> previousInputs, Dictionary<string, int> table)
         {
             int temp;
@@ -234,10 +291,11 @@ namespace Activity3
                 {
                     Console.WriteLine("You've already chosen this slot");
                 }
-
             }
         }
-
+        /// <summary>
+        /// Selection mode for inputting grid co-ordinance.
+        /// </summary>
         private enum GridSelection
         {
             Row,
@@ -259,7 +317,6 @@ namespace Activity3
         /// Creates a dictionary that has keys that represent the row and column with a value that
         /// represents an index of an array.
         /// </summary>
-        /// <returns></returns>
         private Dictionary<string, int> FillTable()
         {
             Dictionary<string, int> temp = new Dictionary<string, int>();
@@ -272,10 +329,8 @@ namespace Activity3
             temp.Add("31", 6);
             temp.Add("32", 7);
             temp.Add("33", 8);
-
             return temp;
         }
-
     }
     //Used to index emoticons
     public enum Face

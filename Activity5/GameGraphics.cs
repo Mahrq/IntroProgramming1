@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 /// <summary>
 /// File:           GameGraphics.cs
 /// Description:    Draws the hangman picture as well as cover the mystery Words

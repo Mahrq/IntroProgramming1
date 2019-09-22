@@ -28,7 +28,6 @@ namespace ProjectUtility
         ///     -If input is a 'y' or 'n' char then return the char
         ///     -Otherwise print to console error, prompt user to make another input
         /// </summary>
-        /// <returns></returns>
         public static string ValidateYesNo()
         {
             string input;
@@ -52,8 +51,8 @@ namespace ProjectUtility
         ///     Overloaded version from the string variation of this method.
         /// 
         /// Arguments:
-        ///     -The minimum integer input allowed from the user
-        ///     -The Maximum integer input allowed from the user
+        ///     -The minimum integer input allowed from the user. Default 0
+        ///     -The Maximum integer input allowed from the user. Default 9
         ///     
         /// Steps:
         ///     -Try get user input
@@ -63,9 +62,6 @@ namespace ProjectUtility
         ///     -If the input passes all checks then it is a successful input and returns the integer input
         ///     -Otherwise print to console error, prompt user to make another input.
         /// </summary>
-        /// <param name="rangeMin">Specify the min input allowed. Default 0</param>
-        /// <param name="rangeMax">Specify the max input allowed. Default 9</param>
-        /// <returns></returns>
         public static int ValidateInput(int rangeMin = 0, int rangeMax = 9)
         {
             int userInput;
@@ -117,9 +113,6 @@ namespace ProjectUtility
         ///     -If the input equals any item in the list, return true
         ///     -Return false, if finished iterating through the list with no matches
         /// </summary>
-        /// <param name="storedInputs">List of the user's previous inputs</param>
-        /// <param name="input">Current input to check</param>
-        /// <returns></returns>
         public static bool CheckAlreadyUsedInput<T>(List<T> storedInputs, T input)
         {
             for (int i = 0; i < storedInputs.Count; i++)
@@ -143,7 +136,6 @@ namespace ProjectUtility
         ///     -If the input passes all checks then it is a successful input and returns the string input
         ///     -Otherwise print to console error, prompt user to make another input
         /// </summary>
-        /// <returns></returns>
         public static string ValidateInput()
         {
             string userInput;
@@ -190,8 +182,6 @@ namespace ProjectUtility
         ///     -If lower casing, then return the input as lower case character
         ///     -If default, then return the input as it was
         /// </summary>
-        /// <param name="letterCasing">Choose whether or not the input gets changed to a lower or upper case or left alone</param>
-        /// <returns></returns>
         public static char ValidateLetter(LetterCase letterCasing = LetterCase.Default)
         {
             string userInput;

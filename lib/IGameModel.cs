@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ProjectUtility
+﻿namespace ProjectUtility
 {
     /// <summary>
     /// File:           IGameModel.cs
@@ -38,7 +32,6 @@ namespace ProjectUtility
         /// Arguments:
         ///     -Reference to the condition of the while loop that this method is in
         /// </summary>
-        /// <param name="gameLoop"></param>
         void GameCycle(ref bool gameLoop);
         /// <summary>
         /// GameConclusion():

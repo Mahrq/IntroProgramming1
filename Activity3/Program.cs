@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ProjectUtility;
+﻿using ProjectUtility;
 /// <summary>
 /// File:           Program.cs
 /// Description:    Smileys and Grumpys game where the user has to pick the 3 smileys in a 3x3 grid

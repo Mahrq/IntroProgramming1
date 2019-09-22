@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ProjectUtility;
 /// <summary>
 /// File:           HangManGame.cs
@@ -40,7 +37,12 @@ namespace Activity5
  ║   
 ═╩═";
         /// <summary>
-        /// Introduce user to the game and display instructions.
+        /// Intro():
+        ///     Introduce user to the game and provide instructions
+        ///     
+        ///Steps:
+        ///     -Print to the console, welcome message and instructions
+        ///     -Read user input
         /// </summary>
         public void Intro()
         {
@@ -50,7 +52,15 @@ namespace Activity5
             Console.ReadLine();
         }
         /// <summary>
-        /// Set up game for a new round
+        /// GameSetUp():
+        ///     Set up game for a new round
+        ///     
+        /// Steps:
+        ///     -Get user to select from a topic.
+        ///     -Generate a hidden from the chosen topic
+        ///     -Reset wrong guesses count to 0.
+        ///     -Reset the hang man picture.
+        ///     -Clear previously stored input.
         /// </summary>
         public void GameSetUp()
         {
@@ -74,7 +84,25 @@ namespace Activity5
             }       
         }
         /// <summary>
-        /// Algorithim for the game cycle of the game.
+        /// GameCycle():
+        ///     Algorithim for the game cycle of the game.
+        /// 
+        /// Arguments:
+        ///     -A reference to a bool depicting a game loop.
+        ///     
+        /// Steps:
+        ///     1# Input Cycle
+        ///     -Draw the hangman game.
+        ///     -Ask user for letter input.
+        ///     -Compare the input with the hidden word.
+        ///     -If input was wrong then increase wrong guess
+        ///     -Refresh the information for the next draw cycle.
+        ///     
+        ///     2# Loop Cycle
+        ///     -If all the letters a revealed then the player has won, terminate loop.
+        ///     -If the player reaches too many wrong guesses then the game is lost,
+        ///     reveal the hidden word, terminate loop.
+        ///     -Else continue input cycle.
         /// </summary>
         /// <param name="gameLoop"></param>
         public void GameCycle(ref bool gameLoop)
@@ -123,7 +151,12 @@ namespace Activity5
             }
         }
         /// <summary>
-        /// Display results and stats of the game session
+        /// GameConclusion():
+        ///     Display the results of the entire game session
+        ///     
+        /// Steps:
+        ///     -Display the total games won and lost.
+        ///     -Wait input from user.
         /// </summary>
         public void GameConclusion()
         {
@@ -133,7 +166,12 @@ namespace Activity5
             Console.ReadLine();
         }
         /// <summary>
-        /// Thank user for playing before exiting the application.
+        /// Outro():
+        ///     Thank user for playing before exiting the application.
+        ///     
+        /// Steps:
+        ///     -Display exiting message.
+        ///     -Wait input from user.
         /// </summary>
         public void Outro()
         {
@@ -279,7 +317,7 @@ namespace Activity5
     /// <summary>
     /// Class contains the hidden word and its propertise to help with the game interaction.
     /// </summary>
-    public class HangManMysteryWord
+    class HangManMysteryWord
     {
         //Chosen word that the user will have to try and reveal
         public string Word { get; private set; }

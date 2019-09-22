@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using ProjectUtility;
 /// <summary>
 /// File:           BullsAndCowsGame.cs
@@ -104,7 +101,6 @@ namespace Activity2
         ///     -If user's attempts is 0, then increase lose count, terminate game loop.
         ///     -If user's numbers don't match and still has attempts then repeat the input cycle
         /// </summary>
-        /// <param name="gameLoop">Loop conditional for continuing the game</param>
         public void GameCycle(ref bool gameLoop)
         {
             //Display amount of attempts the user has to guess the number
@@ -141,7 +137,12 @@ namespace Activity2
             }
         }
         /// <summary>
-        /// Display the results of the entire game session
+        /// GameConclusion():
+        ///     Display the results of the entire game session
+        ///     
+        /// Steps:
+        ///     -Display the total games won and lost.
+        ///     -Wait input from user.
         /// </summary>
         public void GameConclusion()
         {
@@ -152,7 +153,12 @@ namespace Activity2
             Console.ReadLine();
         }
         /// <summary>
-        /// Thank user for playing before exiting the application.
+        /// Outro():
+        ///     Thank user for playing before exiting the application.
+        ///     
+        /// Steps:
+        ///     -Display exiting message.
+        ///     -Wait input from user.
         /// </summary>
         public void Outro()
         {
@@ -161,7 +167,13 @@ namespace Activity2
             Console.ReadLine();
         }
         /// <summary>
-        /// Ask user to select a difficulty
+        /// SelectDifficulty():
+        ///     Ask user to select a difficulty
+        ///     
+        /// Steps:
+        ///     -Display instructions to user.
+        ///     -Get user input.
+        ///     -Return the slected mode.
         /// </summary>
         /// <returns></returns>
         private Difficulty SelectDifficulty()
@@ -184,7 +196,19 @@ namespace Activity2
             }
         }
         /// <summary>
-        /// Allows the user to enter a guess and checks for valid input.
+        /// GetUserInput():
+        ///     Allows the user to enter a guess and checks for valid input.
+        ///     
+        /// Arguments:
+        ///     -Size of the character array of which the user will have to input this amount.
+        /// 
+        /// Steps:
+        ///     -Get user input.
+        ///     -Check if input containts any characters.
+        ///     -Check if number exceeds 32bit Integer.
+        ///     -Check if any character contains 0.
+        ///     -Check if if the length of the input matches the size required.
+        ///     -If input passes all checks then return the input.
         /// </summary>
         /// <param name="inputArraySize">Will return array of the size</param>
         /// <returns></returns>
@@ -238,8 +262,20 @@ namespace Activity2
             }
         }
         /// <summary>
-        /// Generates a specified amount of numbers and stores each digit into an array index.
-        /// Each digit is between 1-9 and is unique.
+        /// GenerateCpuNumbers()
+        ///     Generates a specified amount of numbers and stores each digit into an array index.
+        ///     Each digit is between 1-9 and is unique.
+        ///     
+        /// Arguments:
+        ///     -The amount of numbers the computer wil generate.
+        /// 
+        /// Steps:
+        ///     -Create array of specified size.
+        ///     -Iterate through the array.
+        ///     -Randomly generate a number between 1 - 9
+        ///     -If the generated number has already been used, then generate a new number.
+        ///     -Else the number is assigned into that element of the array.
+        ///     -Return array when finished iterating.
         /// </summary>
         /// <param name="inputArraySize">Will return array of the size</param>
         /// <returns></returns>
@@ -265,13 +301,22 @@ namespace Activity2
             return temp;
         }
         /// <summary>
-        /// Compares both the player and cpu arrays. Numbers equal in the same index will output bull 
-        /// while equal numbers in different index will output cow
+        /// CalculateBullsCows():
+        ///     Compares both the player and cpu arrays. Numbers equal in the same index will output bull 
+        ///     while equal numbers in different index will output cow.
+        /// 
+        /// Arguments:
+        ///     -The Player's input numbers.
+        ///     -The computer's generated numbers.
+        ///     -Reference to a bull counter.
+        ///     -Reference to a cow counter.
+        /// 
+        /// Steps:
+        ///     -Iterate through the player's numbers 
+        ///     -For each player's number, iterate through the Computer's numbers.
+        ///     -If the number is the same at the same index of the computer's number, award a bull point.
+        ///     -IF the number is the same at a different index of the computer's number, award a cow point.
         /// </summary>
-        /// <param name="firstArray">Player's guess</param>
-        /// <param name="secondArray">Cpu's Number</param>
-        /// <param name="bull">Bull score, same number same index</param>
-        /// <param name="cow">Cow score, same number different index</param>
         private void CalculateBullsCows(char[] firstArray, char[] secondArray, out int bull, out int cow)
         {
             //Resets score for the new guess
@@ -299,10 +344,17 @@ namespace Activity2
             }
         }
         /// <summary>
-        /// Returns true if an array has a 0 in one of its index.
+        /// HasZero():
+        ///     Returns true if an array has a 0 in one of its index.
+        /// 
+        /// Arguments:
+        ///     -A character array to be evaluated.
+        /// 
+        /// Steps:
+        ///     -Iterate through each element of the array.
+        ///     -Return true the moment the '0' character is present.
+        ///     -Return false if there aren't any '0' characters.
         /// </summary>
-        /// <param name="arrayToCheck">A char array to inspect.</param>
-        /// <returns></returns>
         private bool HasZero(char[] arrayToCheck)
         {
             for (int i = 0; i < arrayToCheck.Length; i++)
@@ -315,7 +367,7 @@ namespace Activity2
             return false;
         }
         /// <summary>
-        /// Indexer for game set up
+        /// Mode for game set up
         /// </summary>
         private enum Difficulty
         {
